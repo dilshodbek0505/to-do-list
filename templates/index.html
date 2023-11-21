@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+
+  
+  </head>
+  <body>
+
+      <div class="container w-50 border border-1 p-3">
+        <form method="post"> {% csrf_token %}
+          <div class="mb-3">
+            <label for="" class="form-label">Task</label>
+            <input type="text" name="task" id="" class="form-control" placeholder="Enter task ..." aria-describedby="helpId">
+            <small id="helpId" class="text-muted">Topshiriq nomini kiriting</small>
+          </div>
+          <button type="submit" class="btn btn-success">Add</button>
+        </form>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope='col'>No</th>
+                <th scope="col">Task name</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for task in todo_list%}
+                <tr>
+                  <td scope='row'>
+                    {{forloop.counter}}
+                  </td>
+                  <td>
+                    {% if task.is_done %}
+                    <h5 class="text-decoration-line-through">
+                      {{task.name}}
+                    </h5>    
+                  {% else %}
+                    <h5 scope="row">{{task.name}} </h5>
+                  {% endif %}
+                  <small class="text-muted">{{task.created|date:"j-F g:i A "  }}</small>                 
+                  </td>
+                  <td><a href="{% url "edit" task.id %}" class="fa fa-edit text-success" aria-hidden="true">
+                  </a></td>
+                  <td><a href="{% url "delete" task.id %}" class="fa fa-trash text-danger" aria-hidden="true"></a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

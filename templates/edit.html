@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+
+  
+  </head>
+  <body>
+
+      <div class="container w-50 border border-1 p-3">
+        <h3>Edit task</h3>
+        <hr>
+        <form method="post"> {% csrf_token %}
+            <div class="mb-3">
+                <label for="taskInput" class="form-label">Task name</label>
+                <input type="text"
+                  class="form-control" name="task" id="taskInput" aria-describedby="helpId" placeholder="Enter new task name ..." value="{{task.name}}">
+                <small id="helpId" class="form-text text-muted">Topshiriq nomi</small>
+            </div>
+            <div class="mb-3">
+                <label for="descriptionInput" class="form-label">Description</label>
+                {% if task.description %}
+                  <textarea class="form-control" name="description" aria-describedby="helpDes" id="descriptionInput" rows="3" placeholder="Enter task's description ...">{{task.description}}</textarea>
+                {% else%}
+                  <textarea class="form-control" name="description" aria-describedby="helpDes" id="descriptionInput" rows="3" placeholder="Enter task's description ..."></textarea>
+                {% endif %}
+                <small id="helpDes" class="form-text text-muted">Topshiriq uchun eslatma yozing</small>
+            </div>
+
+            <div class="form-check m-2">
+              {% if task.is_done %}
+                <input class="form-check-input" type="checkbox" name="is_done" id="checkBox" checked>
+              {% else %}
+                <input class="form-check-input" type="checkbox" name="is_done" id="checkBox">              {% endif %}
+              <label class="form-check-label" for="checkBox">
+                Yakunlandi
+              </label>
+            </div>
+
+            <div class="mb-3">
+                  <button type="submit" class="btn btn-success">Ok</button>
+                  <a href="{% url "home" %}" class="btn btn-danger">Cancel</a>
+            </div>
+        </form>
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+      </div>
+   
+    
+
+      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
